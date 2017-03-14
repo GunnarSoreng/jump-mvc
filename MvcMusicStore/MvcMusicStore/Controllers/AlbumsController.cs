@@ -16,7 +16,7 @@ namespace MvcMusicStore.Controllers
 
 
         // Write a new action ourselves:
-        public ActionResult DisplayByArtist(int artistID)
+        public ActionResult DisplayByArtist()
         {
             // Imagine code here!!
             // 'View()' is a little helper method inside Controller class, which AlbumsController inherits from.
@@ -24,6 +24,8 @@ namespace MvcMusicStore.Controllers
         }
 
         // GET: Albums
+        // Added this route to simplify URL to this page:
+        //[Route("Albums/All")]
         public ActionResult Index()
         {
             // Let's get the model
@@ -35,6 +37,8 @@ namespace MvcMusicStore.Controllers
         }
 
         // GET: Albums/Details/5
+        // Change to this URL with routing: Album/5
+        [Route("Album/{id:int}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -52,6 +56,9 @@ namespace MvcMusicStore.Controllers
         // GET: Albums/Create
         // Automatically uses GET (default)
         // This Displays the form to the user
+        // This means you must be logged in to use the following action (Can also be put on the whole controller):
+        //[Authorize(Roles = "Admin")]
+        //[Authorize()]
         public ActionResult Create()
         {
             return View();
@@ -63,7 +70,7 @@ namespace MvcMusicStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AlbumID,Title")] Album album)
+        public ActionResult Create(Album album)
         {
             if (ModelState.IsValid)
             {

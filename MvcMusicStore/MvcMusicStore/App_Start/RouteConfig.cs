@@ -13,6 +13,9 @@ namespace MvcMusicStore
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Added this line myself for 'Attribute Routing':
+            routes.MapMvcAttributeRoutes();
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
